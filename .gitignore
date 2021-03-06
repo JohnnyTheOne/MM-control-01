@@ -16,3 +16,7 @@ Doc
 /build-env
 /MM-control-01/*.hex
 /MM-control-01/version.h
+/MM-control-01/dirty.h
+.pio
+MM-control-01_cmake
+.vscode
