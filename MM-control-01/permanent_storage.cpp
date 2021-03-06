@@ -38,9 +38,9 @@ static const uint8_t layoutVersion = 0xff;
 static eeprom_t * const eepromBase = reinterpret_cast<eeprom_t*>(0); //!< First EEPROM address
 static const uint16_t eepromEmpty = 0xffff; //!< EEPROM content when erased
 static const uint16_t eepromLengthCorrectionBase = 7900u; //!< legacy bowden length correction base (~391mm)
-static const uint16_t eepromBowdenLenDefault = 21000u; //!< Default bowden length (~427 mm)
-static const uint16_t eepromBowdenLenMinimum = 17000u; //!< Minimum bowden length (~341 mm)
-static const uint16_t eepromBowdenLenMaximum = 25000u; //!< Maximum bowden length (~792 mm)
+static const uint16_t eepromBowdenLenDefault = 20750u; //!< Default bowden length (~1025 mm)
+static const uint16_t eepromBowdenLenMinimum = 17000u; //!< Minimum bowden length (~840 mm)
+static const uint16_t eepromBowdenLenMaximum = 24750u; //!< Maximum bowden length (~1225 mm)
 
 void permanentStorageInit()
 {
