@@ -231,7 +231,38 @@ void move(int _idler, int _selector, int _pulley)
 
 	} while (_selector != 0 || _idler != 0 || _pulley != 0);
 }
+//_sg=0 is stallguard off
+void move_with_stallguard(int _idler, int _selector, int _pulley, int _sg)
+{
+  int _acc = 50;
+  uint16_t sg_selector=1023;
+  uint16_t sg_idler=1023;
+  uint16_t sg_pulley=1023;
 
+  // gets steps to be done and set direction
+  _idler = set_idler_direction(_idler); 
+  _selector = set_selector_direction(_selector);
+  _pulley = set_pulley_direction(_pulley);
+  
+
+  do
+  {
+    if (_idler > 0) { idler_step_pin_set(); }
+    if (_selector > 0) { selector_step_pin_set();}
+    if (_pulley > 0) { pulley_step_pin_set(); }
+    asm("nop");
+    if (_idler > 0) { idler_step_pin_reset(); _idler--;  delayMicroseconds(1000); }
+    if (_selector > 0) { selector_step_pin_reset(); _selector--; delayMicroseconds(800); }
+    if (_pulley > 0) { pulley_step_pin_reset(); _pulley--;  delayMicroseconds(700); }
+    asm("nop");
+    if (_idler > 0 && _acc <34) {sg_idler= tmc2130_read_sg(AX_IDL);}
+    if (_selector > 0 && _acc <34) {sg_selector= tmc2130_read_sg(AX_SEL);}
+    if (_pulley > 0 && _acc <34) {sg_pulley= tmc2130_read_sg(AX_PUL);}
+    if((sg_selector <= _sg || sg_idler <= _sg || sg_pulley <= _sg) && _sg > 0){break;}
+    if (_acc > 0) { delayMicroseconds(_acc*10); _acc--; }; // super pseudo acceleration control
+
+  } while (_selector != 0 || _idler != 0 || _pulley != 0);
+}
 
 void set_idler_dir_down()
 {
