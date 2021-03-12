@@ -89,7 +89,7 @@
 #define CURRENT_HOLDING_NORMAL {1, 10, 22}  // {17,330,690 mA}
 #define CURRENT_RUNNING_STEALTH {35, 35, 45} // {540,540,690 mA}
 #define CURRENT_RUNNING_NORMAL {30, 35, 47} // {513,540,720 mA}
-#define CURRENT_HOMING {1, 20, 30} //
+#define CURRENT_HOMING {1, 30, 30} //
 
 //mode
 #define HOMING_MODE 0
